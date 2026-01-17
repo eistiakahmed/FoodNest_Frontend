@@ -15,13 +15,13 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="absolute top-0 left-0 right-0 z-50 lg:bg-transparent bg-white lg:shadow-none shadow-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="absolute top-0 left-0 right-0 z-50  lg:shadow-none ">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 bg-white lg:px-8 shadow-md">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <span className="text-2xl font-bold text-orange-600">Food</span>
-            <span className="text-2xl font-bold lg:text-white text-gray-800">Nest</span>
+            <span className="text-3xl font-extrabold text-orange-600">Food</span>
+            <span className="text-3xl font-extrabold  text-gray-800">Nest</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -30,7 +30,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="lg:text-white text-gray-700 hover:text-orange-600 font-medium transition-colors duration-200"
+                className=" text-gray-700 hover:text-orange-600 font-semibold transition-colors duration-200"
               >
                 {link.label}
               </Link>
@@ -39,7 +39,10 @@ export default function Navbar() {
 
           {/* CTA Button Desktop */}
           <div className="hidden md:block">
-            <Link href='/login' className="px-6 py-2 bg-orange-600 hover:bg-orange-700 text-white font-semibold rounded-lg transition-colors duration-200">
+            <Link
+              href="/login"
+              className="px-6 py-2 bg-orange-600 hover:bg-orange-700 text-white font-semibold rounded-lg transition-colors duration-200"
+            >
               Login
             </Link>
           </div>
@@ -89,7 +92,10 @@ export default function Navbar() {
                   </Link>
                 ))}
                 <div className="px-4 pt-2">
-                  <Link href='/login' className="w-full px-6 py-2 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition-colors duration-200">
+                  <Link
+                    href="/login"
+                    className="w-full px-6 py-2 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition-colors duration-200"
+                  >
                     Login
                   </Link>
                 </div>
