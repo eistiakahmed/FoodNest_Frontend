@@ -26,10 +26,11 @@ export default function FoodsPage() {
   useEffect(() => {
     const fetchFoods = async () => {
       try {
-        const response = await fetch(
-          'https://foodnest-backend.vercel.app/foods'
-        );
-        const data = await response.json();
+        const response = await fetch('http://localhost:5000/foods');
+        const result = await response.json();
+        
+        // Handle new API response format
+        const data = result.success ? result.data : result;
         setFoods(data);
 
         // Set initial max price based on actual data
@@ -192,19 +193,19 @@ export default function FoodsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center pt-20">
+      <div className="min-h-screen bg-black flex items-center justify-center pt-20">
         <div className="text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-orange-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading delicious foods...</p>
+          <p className="text-gray-400">Loading delicious foods...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-20">
+    <div className="min-h-screen bg-black">
       {/* Hero Section */}
-      <div className="w-7xl mx-auto bg-linear-to-r from-orange-500 to-red-600 text-white py-16">
+      <div className="bg-gradient-to-r from-orange-500 to-red-600 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -255,11 +256,11 @@ export default function FoodsPage() {
             <div className="lg:hidden mb-4">
               <button
                 onClick={() => setShowFilters(!showFilters)}
-                className="w-full flex items-center justify-between px-4 py-3 bg-white rounded-lg shadow-sm border"
+                className="w-full flex items-center justify-between px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg shadow-sm"
               >
-                <span className="font-medium">Filters & Sort</span>
+                <span className="font-medium text-white">Filters & Sort</span>
                 <svg
-                  className={`w-5 h-5 transform transition-transform ${showFilters ? 'rotate-180' : ''}`}
+                  className={`w-5 h-5 text-white transform transition-transform ${showFilters ? 'rotate-180' : ''}`}
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -276,14 +277,14 @@ export default function FoodsPage() {
 
             {/* Filters Panel */}
             <div
-              className={`bg-white rounded-2xl shadow-sm border p-6 space-y-6 ${showFilters ? 'block' : 'hidden lg:block'}`}
+              className={`bg-gray-900 border border-gray-700 rounded-2xl shadow-sm p-6 space-y-6 ${showFilters ? 'block' : 'hidden lg:block'}`}
             >
               {/* Filter Header */}
               <div className="flex items-center justify-between">
-                <h3 className="text-lg font-bold text-gray-900">Filters</h3>
+                <h3 className="text-lg font-bold text-white">Filters</h3>
                 <button
                   onClick={clearFilters}
-                  className="text-sm text-orange-600 hover:text-orange-700 font-medium"
+                  className="text-sm text-orange-500 hover:text-orange-400 font-medium"
                 >
                   Clear All
                 </button>
@@ -291,13 +292,13 @@ export default function FoodsPage() {
 
               {/* Sort By */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
                   Sort By
                 </label>
                 <select
                   value={filters.sortBy}
                   onChange={(e) => updateFilter('sortBy', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 bg-gray-800 text-white"
                 >
                   <option value="name">Name (A-Z)</option>
                   <option value="price-low">Price (Low to High)</option>
@@ -309,7 +310,7 @@ export default function FoodsPage() {
 
               {/* Category Filter */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
                   Category
                 </label>
                 <div className="space-y-2 max-h-40 overflow-y-auto">
@@ -323,9 +324,9 @@ export default function FoodsPage() {
                         name="category"
                         checked={filters.category === category}
                         onChange={() => updateFilter('category', category)}
-                        className="text-orange-600 focus:ring-orange-500"
+                        className="text-orange-600 focus:ring-orange-500 bg-gray-800 border-gray-600"
                       />
-                      <span className="ml-2 text-sm text-gray-700">
+                      <span className="ml-2 text-sm text-gray-300">
                         {category}
                       </span>
                     </label>
@@ -335,13 +336,13 @@ export default function FoodsPage() {
 
               {/* Cuisine Filter */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
                   Cuisine
                 </label>
                 <select
                   value={filters.cuisine}
                   onChange={(e) => updateFilter('cuisine', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
+                  className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 bg-gray-800 text-white"
                 >
                   {cuisines.map((cuisine) => (
                     <option key={cuisine} value={cuisine}>
@@ -353,12 +354,12 @@ export default function FoodsPage() {
 
               {/* Price Range */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
                   Price Range: ₹{filters.minPrice} - ₹{filters.maxPrice}
                 </label>
                 <div className="space-y-3">
                   <div>
-                    <label className="text-xs text-gray-500">Min Price</label>
+                    <label className="text-xs text-gray-400">Min Price</label>
                     <input
                       type="range"
                       min="0"
@@ -372,7 +373,7 @@ export default function FoodsPage() {
                     />
                   </div>
                   <div>
-                    <label className="text-xs text-gray-500">Max Price</label>
+                    <label className="text-xs text-gray-400">Max Price</label>
                     <input
                       type="range"
                       min={filters.minPrice}
@@ -390,7 +391,7 @@ export default function FoodsPage() {
 
               {/* Dietary Preferences */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
                   Dietary Preferences
                 </label>
                 <label className="flex items-center cursor-pointer">
@@ -398,9 +399,9 @@ export default function FoodsPage() {
                     type="checkbox"
                     checked={filters.isVeg}
                     onChange={(e) => updateFilter('isVeg', e.target.checked)}
-                    className="text-orange-600 focus:ring-orange-500"
+                    className="text-orange-600 focus:ring-orange-500 bg-gray-800 border-gray-600"
                   />
-                  <span className="ml-2 text-sm text-gray-700">
+                  <span className="ml-2 text-sm text-gray-300">
                     Vegetarian Only
                   </span>
                 </label>
@@ -408,7 +409,7 @@ export default function FoodsPage() {
 
               {/* Spice Level */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
                   Spice Level
                 </label>
                 <div className="space-y-2">
@@ -422,9 +423,9 @@ export default function FoodsPage() {
                         name="spiceLevel"
                         checked={filters.spiceLevel === level}
                         onChange={() => updateFilter('spiceLevel', level)}
-                        className="text-orange-600 focus:ring-orange-500"
+                        className="text-orange-600 focus:ring-orange-500 bg-gray-800 border-gray-600"
                       />
-                      <span className="ml-2 text-sm text-gray-700">
+                      <span className="ml-2 text-sm text-gray-300">
                         {level}
                       </span>
                     </label>
@@ -434,7 +435,7 @@ export default function FoodsPage() {
 
               {/* Rating Filter */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-300 mb-2">
                   Minimum Rating
                 </label>
                 <div className="space-y-2">
@@ -448,9 +449,9 @@ export default function FoodsPage() {
                         name="rating"
                         checked={filters.rating === rating}
                         onChange={() => updateFilter('rating', rating)}
-                        className="text-orange-600 focus:ring-orange-500"
+                        className="text-orange-600 focus:ring-orange-500 bg-gray-800 border-gray-600"
                       />
-                      <span className="ml-2 text-sm text-gray-700 flex items-center">
+                      <span className="ml-2 text-sm text-gray-300 flex items-center">
                         {rating === 0 ? (
                           'Any Rating'
                         ) : (
@@ -478,12 +479,12 @@ export default function FoodsPage() {
             {/* Results Header */}
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h2 className="text-2xl font-bold text-gray-900">
+                <h2 className="text-2xl font-bold text-white">
                   {searchQuery
                     ? `Search Results for "${searchQuery}"`
                     : 'All Foods'}
                 </h2>
-                <p className="text-gray-600">
+                <p className="text-gray-400">
                   Showing {filteredFoods.length} of {foods.length} items
                 </p>
               </div>
@@ -513,7 +514,7 @@ export default function FoodsPage() {
                   className="text-center py-16"
                 >
                   <svg
-                    className="w-24 h-24 text-gray-300 mx-auto mb-4"
+                    className="w-24 h-24 text-gray-600 mx-auto mb-4"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -525,10 +526,10 @@ export default function FoodsPage() {
                       d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.239 0-4.236-.18-5.536-.437C3.97 14.304 3 12.822 3 11.077V5a2 2 0 012-2h14a2 2 0 012 2v6.077c0 1.745-.97 3.227-2.464 3.486A47.796 47.796 0 0112 15z"
                     />
                   </svg>
-                  <h3 className="text-xl font-medium text-gray-500 mb-2">
+                  <h3 className="text-xl font-medium text-gray-400 mb-2">
                     No foods found
                   </h3>
-                  <p className="text-gray-400 mb-4">
+                  <p className="text-gray-500 mb-4">
                     {searchQuery
                       ? `No results for "${searchQuery}". Try adjusting your search or filters.`
                       : 'No foods match your current filters. Try adjusting your criteria.'}

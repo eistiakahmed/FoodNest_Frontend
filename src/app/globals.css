@@ -2,8 +2,8 @@
 @plugin "daisyui";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0a;
+  --foreground: #ffffff;
   --font-ubuntu: 'Ubuntu', sans-serif;
 }
 
@@ -12,13 +12,6 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-ubuntu);
   --font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, 'Courier New', monospace;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
@@ -46,4 +39,56 @@ body {
 @utility font-ubuntu-bold {
   font-family: 'Ubuntu', sans-serif;
   font-weight: 700;
+}
+
+/* Enhanced input visibility for dark theme */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="url"],
+textarea,
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.3) !important;
+}
+
+/* Ensure placeholder text is visible in dark theme */
+::placeholder {
+  color: #9ca3af !important;
+  opacity: 1 !important;
+}
+
+/* Force input text color for dark theme */
+input,
+textarea,
+select {
+  color: #ffffff !important;
+  background-color: #1f2937 !important;
+  border-color: #374151 !important;
+}
+
+/* Dark theme scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4b5563;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
 }
