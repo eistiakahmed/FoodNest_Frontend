@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export default function CustomerTestimonials() {
   const containerVariants = {
@@ -27,23 +28,28 @@ export default function CustomerTestimonials() {
       name: 'Sarah Johnson',
       role: 'Food Enthusiast',
       rating: 5,
-      comment: 'FoodNest has completely changed how I order food. The delivery is always on time and the food quality is exceptional!',
-      avatar: '👩‍💼'
+      comment:
+        'FoodNest has completely changed how I order food. The delivery is always on time and the food quality is exceptional!',
+      avatar:
+        'https://i.ibb.co.com/zTWV3X4D/From-Klick-Pin-CF-Pin-by-Ruhan-Sekh-on-Aira-Rawat-Bollywood-hairstyles-Beard-photography-Best-poses.jpg',
     },
     {
       name: 'Mike Chen',
       role: 'Busy Professional',
       rating: 5,
-      comment: 'As someone who works long hours, FoodNest is a lifesaver. Quick, reliable, and delicious food every single time.',
-      avatar: '👨‍💻'
+      comment:
+        'As someone who works long hours, FoodNest is a lifesaver. Quick, reliable, and delicious food every single time.',
+      avatar: 'https://i.ibb.co.com/PvY1qXhh/cast1.jpg',
     },
     {
       name: 'Emily Rodriguez',
       role: 'College Student',
       rating: 5,
-      comment: 'Great variety of restaurants and affordable prices. The app is super easy to use and delivery is always fast!',
-      avatar: '👩‍🎓'
-    }
+      comment:
+        'Great variety of restaurants and affordable prices. The app is super easy to use and delivery is always fast!',
+      avatar:
+        'https://i.ibb.co.com/yFMTFsks/From-Klick-Pin-CF-pingl-par-ajeet-sur-beautiful-lady-Cinquante-nuances-Coiffure-Cinquante-nuances.jpg',
+    },
   ];
 
   return (
@@ -72,7 +78,7 @@ export default function CustomerTestimonials() {
               className="bg-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-700"
             >
               <div className="flex items-center mb-4">
-                <div className="text-3xl mr-3">{testimonial.avatar}</div>
+                <Image src={testimonial.avatar} alt={testimonial.name} height={100} width={100} className="text-3xl mr-3 h-12.5 w-12.5 rounded-full object-cover"/>
                 <div>
                   <h4 className="font-semibold text-white">{testimonial.name}</h4>
                   <p className="text-sm text-gray-400">{testimonial.role}</p>

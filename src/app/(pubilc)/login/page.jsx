@@ -162,44 +162,7 @@ export default function LoginPage() {
               </div>
             </motion.div>
 
-            {/* Social Login Buttons */}
-            <motion.div variants={itemVariants} className="space-y-3">
-              <button
-                onClick={() => handleSocialLogin('Google')}
-                className="w-full flex items-center justify-center px-4 py-3 border-2 border-gray-600 rounded-lg hover:border-gray-500 transition-colors duration-200 bg-gray-900"
-              >
-                <FaGoogle className="text-red-500 mr-3" />
-                <span className="text-gray-300 font-medium">Continue with Google</span>
-              </button>
-              
-              <div className="grid grid-cols-2 gap-3">
-                <button
-                  onClick={() => handleSocialLogin('Facebook')}
-                  className="flex items-center justify-center px-4 py-3 border-2 border-gray-600 rounded-lg hover:border-gray-500 transition-colors duration-200 bg-gray-900"
-                >
-                  <FaFacebookF className="text-blue-500 mr-2" />
-                  <span className="text-gray-300 font-medium">Facebook</span>
-                </button>
-                
-                <button
-                  onClick={() => handleSocialLogin('Apple')}
-                  className="flex items-center justify-center px-4 py-3 border-2 border-gray-600 rounded-lg hover:border-gray-500 transition-colors duration-200 bg-gray-900"
-                >
-                  <FaApple className="text-gray-300 mr-2" />
-                  <span className="text-gray-300 font-medium">Apple</span>
-                </button>
-              </div>
-            </motion.div>
-
-            {/* Divider */}
-            <motion.div variants={itemVariants} className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-700" />
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-black text-gray-400">Or continue with email</span>
-              </div>
-            </motion.div>
+            
 
             {/* Login Form */}
             <motion.form variants={itemVariants} onSubmit={handleSubmit} className="space-y-6">

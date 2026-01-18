@@ -26,19 +26,24 @@ export default function PopularCategories() {
   const categories = [
     {
       name: 'Pizza',
-      image: 'https://i.ibb.co/gLsnV1S/Pizza-3007395.jpg',
+      image:
+        'https://i.ibb.co.com/mF935HMn/From-Klick-Pin-CF-Pizza-Photoshoot-for-a-Client.jpg',
     },
     {
       name: 'Sushi',
-      image: 'https://i.ibb.co/GLm4T8S/Sushi-platter.jpg',
+      image:
+        'https://i.ibb.co.com/My9PpRnV/From-Klick-Pin-CF-Pin-by-Alma-Macabe-on-Alma-Pins-Mixe-Healthy-food-motivation-Japanese-food-dishes.jpg',
     },
     {
       name: 'Burgers',
       image:
-        'https://i.ibb.co/v4RxwsR/25473-the-perfect-basic-burger-DDMFS-4x3-56eaba3833fd4a26a82755bcd0be0c54.jpg',
-   
+        'https://i.ibb.co.com/sd6Pwj2P/From-Klick-Pin-CF-Zinger-Burger-Cheese-Burger-Beef-Burger.jpg',
     },
-    { name: 'Desserts', image: 'https://i.ibb.co/DDNw0fC/summer-desserts-1.jpg' },
+    {
+      name: 'Desserts',
+      image:
+        'https://i.ibb.co.com/9kSWtCjy/From-Klick-Pin-CF-Pin-de-alaibtisamat-alkhalida-em-Sobremesas-deliciosas-Guloseima.jpg',
+    },
   ];
 
   return (

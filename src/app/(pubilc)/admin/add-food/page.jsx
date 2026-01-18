@@ -42,6 +42,9 @@ export default function AddFoodPage() {
   const categories = [
     'Appetizer',
     'Main Course',
+    'Burger',
+    'Sushi',
+    'Pizza',
     'Dessert',
     'Beverage',
     'Snack',

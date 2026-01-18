@@ -219,44 +219,7 @@ export default function SignupPage() {
               </p>
             </motion.div>
 
-            {/* Social Signup Buttons */}
-            <motion.div variants={itemVariants} className="space-y-3">
-              <button
-                onClick={() => handleSocialSignup('Google')}
-                className="w-full flex items-center justify-center px-4 py-3 border-2 border-gray-600 rounded-lg hover:border-gray-500 transition-colors duration-200 bg-gray-800"
-              >
-                <FaGoogle className="text-red-500 mr-3" />
-                <span className="text-gray-300 font-medium">Sign up with Google</span>
-              </button>
-              
-              <div className="grid grid-cols-2 gap-3">
-                <button
-                  onClick={() => handleSocialSignup('Facebook')}
-                  className="flex items-center justify-center px-4 py-3 border-2 border-gray-600 rounded-lg hover:border-gray-500 transition-colors duration-200 bg-gray-800"
-                >
-                  <FaFacebookF className="text-blue-600 mr-2" />
-                  <span className="text-gray-300 font-medium">Facebook</span>
-                </button>
-                
-                <button
-                  onClick={() => handleSocialSignup('Apple')}
-                  className="flex items-center justify-center px-4 py-3 border-2 border-gray-600 rounded-lg hover:border-gray-500 transition-colors duration-200 bg-gray-800"
-                >
-                  <FaApple className="text-gray-300 mr-2" />
-                  <span className="text-gray-300 font-medium">Apple</span>
-                </button>
-              </div>
-            </motion.div>
-
-            {/* Divider */}
-            <motion.div variants={itemVariants} className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-300" />
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-black text-gray-400">Or sign up with email</span>
-              </div>
-            </motion.div>
+            
 
             {/* Signup Form */}
             <motion.form variants={itemVariants} onSubmit={handleSubmit} className="space-y-4">
