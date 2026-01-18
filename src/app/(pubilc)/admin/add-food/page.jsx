@@ -2,18 +2,18 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import toast, { Toaster } from 'react-hot-toast';
-import { 
-  FaPlus, 
-  FaTrash, 
-  FaUpload, 
-  FaSpinner, 
-  FaDollarSign, 
-  FaCamera, 
-  FaUtensils, 
+import {
+  FaPlus,
+  FaTrash,
+  FaUpload,
+  FaSpinner,
+  FaDollarSign,
+  FaCamera,
+  FaUtensils,
   FaCog,
   FaInfoCircle,
   FaImage,
-  FaLeaf
+  FaLeaf,
 } from 'react-icons/fa';
 
 export default function AddFoodPage() {
@@ -33,27 +33,43 @@ export default function AddFoodPage() {
     spiceLevel: 'Low',
     ingredients: [''],
     portionSize: '',
-    restaurantId: ''
+    restaurantId: '',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [imagePreview, setImagePreview] = useState('');
 
   const categories = [
-    'Appetizer', 'Main Course', 'Dessert', 'Beverage', 'Snack', 'Salad', 'Soup', 'Breakfast'
+    'Appetizer',
+    'Main Course',
+    'Dessert',
+    'Beverage',
+    'Snack',
+    'Salad',
+    'Soup',
+    'Breakfast',
   ];
 
   const cuisines = [
-    'Indian', 'Chinese', 'Italian', 'Mexican', 'Japanese', 'American', 'Thai', 'Mediterranean', 'French', 'Korean'
+    'Indian',
+    'Chinese',
+    'Italian',
+    'Mexican',
+    'Japanese',
+    'American',
+    'Thai',
+    'Mediterranean',
+    'French',
+    'Korean',
   ];
 
   const spiceLevels = ['Low', 'Medium', 'High'];
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: type === 'checkbox' ? checked : value,
     }));
 
     // Handle image preview
@@ -63,31 +79,41 @@ export default function AddFoodPage() {
   };
 
   const handleArrayChange = (index, value, arrayName) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [arrayName]: prev[arrayName].map((item, i) => i === index ? value : item)
+      [arrayName]: prev[arrayName].map((item, i) =>
+        i === index ? value : item
+      ),
     }));
   };
 
   const addArrayItem = (arrayName) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [arrayName]: [...prev[arrayName], '']
+      [arrayName]: [...prev[arrayName], ''],
     }));
   };
 
   const removeArrayItem = (index, arrayName) => {
     if (formData[arrayName].length > 1) {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        [arrayName]: prev[arrayName].filter((_, i) => i !== index)
+        [arrayName]: prev[arrayName].filter((_, i) => i !== index),
       }));
     }
   };
 
   const validateForm = () => {
-    const requiredFields = ['name', 'price', 'category', 'cuisine', 'description'];
-    const missingFields = requiredFields.filter(field => !formData[field].trim());
+    const requiredFields = [
+      'name',
+      'price',
+      'category',
+      'cuisine',
+      'description',
+    ];
+    const missingFields = requiredFields.filter(
+      (field) => !formData[field].trim()
+    );
 
     if (missingFields.length > 0) {
       toast.error(`Please fill in: ${missingFields.join(', ')}`);
@@ -99,7 +125,10 @@ export default function AddFoodPage() {
       return false;
     }
 
-    if (formData.discountPrice && parseFloat(formData.discountPrice) >= parseFloat(formData.price)) {
+    if (
+      formData.discountPrice &&
+      parseFloat(formData.discountPrice) >= parseFloat(formData.price)
+    ) {
       toast.error('Discount price must be less than original price');
       return false;
     }
@@ -109,7 +138,7 @@ export default function AddFoodPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!validateForm()) return;
 
     setIsSubmitting(true);
@@ -120,20 +149,27 @@ export default function AddFoodPage() {
       const cleanedData = {
         ...formData,
         price: parseFloat(formData.price),
-        discountPrice: formData.discountPrice ? parseFloat(formData.discountPrice) : null,
+        discountPrice: formData.discountPrice
+          ? parseFloat(formData.discountPrice)
+          : null,
         calories: formData.calories ? parseInt(formData.calories) : null,
-        preparationTime: formData.preparationTime ? parseInt(formData.preparationTime) : null,
-        ingredients: formData.ingredients.filter(item => item.trim() !== ''),
-        images: formData.images.filter(item => item.trim() !== '')
+        preparationTime: formData.preparationTime
+          ? parseInt(formData.preparationTime)
+          : null,
+        ingredients: formData.ingredients.filter((item) => item.trim() !== ''),
+        images: formData.images.filter((item) => item.trim() !== ''),
       };
 
-      const response = await fetch('http://localhost:5000/add_foods', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(cleanedData)
-      });
+      const response = await fetch(
+        'https://foodnest-backend.vercel.app/add_foods',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(cleanedData),
+        }
+      );
 
       const result = await response.json();
 
@@ -145,7 +181,7 @@ export default function AddFoodPage() {
             color: 'white',
           },
         });
-        
+
         // Reset form
         setFormData({
           name: '',
@@ -163,7 +199,7 @@ export default function AddFoodPage() {
           spiceLevel: 'Low',
           ingredients: [''],
           portionSize: '',
-          restaurantId: ''
+          restaurantId: '',
         });
         setImagePreview('');
       } else {
@@ -199,7 +235,7 @@ export default function AddFoodPage() {
 
   return (
     <div className="min-h-screen bg-black">
-      <Toaster 
+      <Toaster
         position="top-right"
         toastOptions={{
           duration: 3000,
@@ -209,7 +245,7 @@ export default function AddFoodPage() {
           },
         }}
       />
-      
+
       {/* Hero Section */}
       <div className="bg-linear-to-r from-orange-500 to-red-600 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -245,7 +281,7 @@ export default function AddFoodPage() {
                 </span>
                 Basic Information
               </h2>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-semibold text-gray-300 mb-2">
@@ -273,9 +309,17 @@ export default function AddFoodPage() {
                     required
                     className="w-full px-4 py-3 border-2 border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-800 text-white shadow-md hover:border-gray-500"
                   >
-                    <option value="" className="text-gray-400">Select Category</option>
-                    {categories.map(category => (
-                      <option key={category} value={category} className="text-white bg-gray-800">{category}</option>
+                    <option value="" className="text-gray-400">
+                      Select Category
+                    </option>
+                    {categories.map((category) => (
+                      <option
+                        key={category}
+                        value={category}
+                        className="text-white bg-gray-800"
+                      >
+                        {category}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -291,9 +335,17 @@ export default function AddFoodPage() {
                     required
                     className="w-full px-4 py-3 border-2 border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-800 text-white shadow-md hover:border-gray-500"
                   >
-                    <option value="" className="text-gray-400">Select Cuisine</option>
-                    {cuisines.map(cuisine => (
-                      <option key={cuisine} value={cuisine} className="text-white bg-gray-800">{cuisine}</option>
+                    <option value="" className="text-gray-400">
+                      Select Cuisine
+                    </option>
+                    {cuisines.map((cuisine) => (
+                      <option
+                        key={cuisine}
+                        value={cuisine}
+                        className="text-white bg-gray-800"
+                      >
+                        {cuisine}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -337,7 +389,7 @@ export default function AddFoodPage() {
                 </span>
                 Pricing & Details
               </h2>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div>
                   <label className="block text-sm font-semibold text-gray-300 mb-2">
@@ -412,8 +464,14 @@ export default function AddFoodPage() {
                     onChange={handleInputChange}
                     className="w-full px-4 py-3 border-2 border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-800 text-white shadow-md hover:border-gray-500"
                   >
-                    {spiceLevels.map(level => (
-                      <option key={level} value={level} className="text-white bg-gray-800">{level}</option>
+                    {spiceLevels.map((level) => (
+                      <option
+                        key={level}
+                        value={level}
+                        className="text-white bg-gray-800"
+                      >
+                        {level}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -442,7 +500,7 @@ export default function AddFoodPage() {
                 </span>
                 Images
               </h2>
-              
+
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-semibold text-gray-300 mb-2">
@@ -477,7 +535,9 @@ export default function AddFoodPage() {
                       <input
                         type="url"
                         value={image}
-                        onChange={(e) => handleArrayChange(index, e.target.value, 'images')}
+                        onChange={(e) =>
+                          handleArrayChange(index, e.target.value, 'images')
+                        }
                         className="flex-1 px-4 py-3 border-2 border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-800 text-white placeholder-gray-400 shadow-md hover:border-gray-500"
                         placeholder="https://example.com/image.jpg"
                       />
@@ -509,13 +569,15 @@ export default function AddFoodPage() {
                 </span>
                 Ingredients
               </h2>
-              
+
               {formData.ingredients.map((ingredient, index) => (
                 <div key={index} className="flex gap-2 mb-2">
                   <input
                     type="text"
                     value={ingredient}
-                    onChange={(e) => handleArrayChange(index, e.target.value, 'ingredients')}
+                    onChange={(e) =>
+                      handleArrayChange(index, e.target.value, 'ingredients')
+                    }
                     className="flex-1 px-4 py-3 border-2 border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all duration-200 bg-gray-800 text-white placeholder-gray-400 shadow-md hover:border-gray-500"
                     placeholder="Enter ingredient"
                   />
@@ -545,7 +607,7 @@ export default function AddFoodPage() {
                 </span>
                 Options
               </h2>
-              
+
               <div className="flex flex-wrap gap-6">
                 <label className="flex items-center cursor-pointer">
                   <input

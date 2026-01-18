@@ -26,9 +26,11 @@ export default function FoodsPage() {
   useEffect(() => {
     const fetchFoods = async () => {
       try {
-        const response = await fetch('http://localhost:5000/foods');
+        const response = await fetch(
+          'https://foodnest-backend.vercel.app/foods'
+        );
         const result = await response.json();
-        
+
         // Handle new API response format
         const data = result.success ? result.data : result;
         setFoods(data);

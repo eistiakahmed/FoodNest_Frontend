@@ -15,9 +15,11 @@ export default function FoodDetailsPage() {
   useEffect(() => {
     const fetchFood = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/foods/${params.food_Id}`);
+        const response = await fetch(
+          `https://foodnest-backend.vercel.app/foods/${params.food_Id}`
+        );
         const result = await response.json();
-        
+
         // Handle new API response format
         const data = result.success ? result.data : result;
         setFood(data);
@@ -64,9 +66,7 @@ export default function FoodDetailsPage() {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center pt-20">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-white mb-4">
-            Food not found
-          </h2>
+          <h2 className="text-2xl font-bold text-white mb-4">Food not found</h2>
           <Link href="/foods" className="text-orange-500 hover:text-orange-400">
             ← Back to Foods
           </Link>
@@ -199,7 +199,9 @@ export default function FoodDetailsPage() {
                   {food.rating}
                 </span>
               </div>
-              <span className="text-gray-400">({food.totalReviews} reviews)</span>
+              <span className="text-gray-400">
+                ({food.totalReviews} reviews)
+              </span>
             </div>
 
             {/* Price */}
@@ -323,7 +325,9 @@ export default function FoodDetailsPage() {
                   >
                     -
                   </button>
-                  <span className="px-4 py-2 border-x border-gray-600">{quantity}</span>
+                  <span className="px-4 py-2 border-x border-gray-600">
+                    {quantity}
+                  </span>
                   <button
                     onClick={() => setQuantity(quantity + 1)}
                     className="px-3 py-2 hover:bg-gray-800 rounded-lg transition-colors"
