@@ -1,6 +1,18 @@
 'use client';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { 
+  FaTrendingUp, 
+  FaChartBar, 
+  FaBullhorn, 
+  FaChartLine, 
+  FaDollarSign, 
+  FaHandshake,
+  FaCheckCircle,
+  FaRocket,
+  FaClock
+} from 'react-icons/fa';
+import { IoMdTrendingUp } from 'react-icons/io';
 
 export default function PartnerPage() {
   const [formData, setFormData] = useState({
@@ -83,8 +95,9 @@ export default function PartnerPage() {
               Partner with FoodNest
             </h1>
             <p className="text-xl opacity-90 max-w-3xl mx-auto">
-              Join our growing network of restaurant partners and reach thousands of hungry customers. 
-              Grow your business with our powerful delivery platform.
+              Join our growing network of restaurant partners and reach
+              thousands of hungry customers. Grow your business with our
+              powerful delivery platform.
             </p>
           </motion.div>
         </div>
@@ -104,7 +117,8 @@ export default function PartnerPage() {
               Why Partner with Us?
             </h2>
             <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-              Discover the benefits of joining FoodNest's restaurant partner network
+              Discover the benefits of joining FoodNest's restaurant partner
+              network
             </p>
           </motion.div>
 
@@ -112,42 +126,53 @@ export default function PartnerPage() {
             {[
               {
                 title: 'Increase Revenue',
-                description: 'Reach new customers and increase your sales with our extensive customer base of 8,500+ active users.',
-                icon: '📈'
+                description:
+                  'Reach new customers and increase your sales with our extensive customer base of 8,500+ active users.',
+                icon: <IoMdTrendingUp className="text-green-400" />,
               },
               {
                 title: 'Easy Management',
-                description: 'Manage orders, menu, and analytics through our user-friendly restaurant dashboard.',
-                icon: '📊'
+                description:
+                  'Manage orders, menu, and analytics through our user-friendly restaurant dashboard.',
+                icon: <FaChartBar className="text-blue-400" />,
               },
               {
                 title: 'Marketing Support',
-                description: 'Get featured in our app promotions and benefit from our marketing campaigns.',
-                icon: '📢'
+                description:
+                  'Get featured in our app promotions and benefit from our marketing campaigns.',
+                icon: <FaBullhorn className="text-purple-400" />,
               },
               {
                 title: 'Real-time Analytics',
-                description: 'Track your performance with detailed insights on sales, customer feedback, and trends.',
-                icon: '📈'
+                description:
+                  'Track your performance with detailed insights on sales, customer feedback, and trends.',
+                icon: <FaChartLine className="text-orange-400" />,
               },
               {
                 title: 'Flexible Commission',
-                description: 'Competitive commission rates with transparent pricing and no hidden fees.',
-                icon: '💰'
+                description:
+                  'Competitive commission rates with transparent pricing and no hidden fees.',
+                icon: <FaDollarSign className="text-yellow-400" />,
               },
               {
                 title: 'Dedicated Support',
-                description: '24/7 partner support team to help you succeed and resolve any issues quickly.',
-                icon: '🤝'
-              }
+                description:
+                  '24/7 partner support team to help you succeed and resolve any issues quickly.',
+                icon: <FaHandshake className="text-red-400" />,
+              },
             ].map((benefit, index) => (
               <motion.div
                 key={benefit.title}
                 variants={itemVariants}
                 className="bg-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-700"
               >
-                <div className="text-4xl mb-4">{benefit.icon}</div>
-                <h3 className="text-xl font-semibold text-white mb-3">{benefit.title}</h3>
+                <div className="text-4xl mb-4 flex gap-5">
+                  {benefit.icon}
+                  <h3 className="text-xl font-semibold text-white mb-3">
+                    {benefit.title}
+                  </h3>
+                </div>
+
                 <p className="text-gray-300">{benefit.description}</p>
               </motion.div>
             ))}
@@ -162,21 +187,28 @@ export default function PartnerPage() {
           viewport={{ once: true }}
           className="mb-20"
         >
-          <motion.div variants={itemVariants} className="bg-gray-800 rounded-2xl shadow-sm p-8 border border-gray-700">
+          <motion.div
+            variants={itemVariants}
+            className="bg-gray-800 rounded-2xl shadow-sm p-8 border border-gray-700"
+          >
             <div className="text-center mb-8">
               <h2 className="text-3xl font-bold text-white mb-4">
                 Apply for Partnership
               </h2>
               <p className="text-lg text-gray-300">
-                Ready to join our network? Fill out the form below and we'll get back to you within 24 hours.
+                Ready to join our network? Fill out the form below and we'll get
+                back to you within 24 hours.
               </p>
             </div>
 
             {submitStatus === 'success' && (
-              <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+              <div className="mb-6 p-4 bg-green-900/20 border border-green-500/30 rounded-lg">
                 <div className="flex items-center">
-                  <span className="text-green-600 mr-2">✅</span>
-                  <p className="text-green-800">Thank you! Your partnership application has been submitted successfully.</p>
+                  <FaCheckCircle className="text-green-400 mr-3 text-xl" />
+                  <p className="text-green-300">
+                    Thank you! Your partnership application has been submitted
+                    successfully.
+                  </p>
                 </div>
               </div>
             )}
@@ -184,7 +216,10 @@ export default function PartnerPage() {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="restaurantName" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label
+                    htmlFor="restaurantName"
+                    className="block text-sm font-medium text-gray-300 mb-2"
+                  >
                     Restaurant Name *
                   </label>
                   <input
@@ -199,7 +234,10 @@ export default function PartnerPage() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="ownerName" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label
+                    htmlFor="ownerName"
+                    className="block text-sm font-medium text-gray-300 mb-2"
+                  >
                     Owner/Manager Name *
                   </label>
                   <input
@@ -217,7 +255,10 @@ export default function PartnerPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-300 mb-2"
+                  >
                     Email Address *
                   </label>
                   <input
@@ -232,7 +273,10 @@ export default function PartnerPage() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label
+                    htmlFor="phone"
+                    className="block text-sm font-medium text-gray-300 mb-2"
+                  >
                     Phone Number *
                   </label>
                   <input
@@ -249,7 +293,10 @@ export default function PartnerPage() {
               </div>
 
               <div>
-                <label htmlFor="address" className="block text-sm font-medium text-gray-300 mb-2">
+                <label
+                  htmlFor="address"
+                  className="block text-sm font-medium text-gray-300 mb-2"
+                >
                   Restaurant Address *
                 </label>
                 <input
@@ -266,7 +313,10 @@ export default function PartnerPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="city" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label
+                    htmlFor="city"
+                    className="block text-sm font-medium text-gray-300 mb-2"
+                  >
                     City *
                   </label>
                   <input
@@ -281,7 +331,10 @@ export default function PartnerPage() {
                   />
                 </div>
                 <div>
-                  <label htmlFor="cuisineType" className="block text-sm font-medium text-gray-300 mb-2">
+                  <label
+                    htmlFor="cuisineType"
+                    className="block text-sm font-medium text-gray-300 mb-2"
+                  >
                     Cuisine Type *
                   </label>
                   <select
@@ -314,12 +367,12 @@ export default function PartnerPage() {
               >
                 {isSubmitting ? (
                   <>
-                    <span className="mr-2">⏳</span>
+                    <FaClock className="mr-2 animate-spin" />
                     Submitting Application...
                   </>
                 ) : (
                   <>
-                    <span className="mr-2">🚀</span>
+                    <FaRocket className="mr-2" />
                     Submit Application
                   </>
                 )}

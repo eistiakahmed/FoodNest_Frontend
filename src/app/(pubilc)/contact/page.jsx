@@ -1,6 +1,12 @@
 'use client';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { 
+  FaFacebook, 
+  FaTwitter, 
+  FaInstagram, 
+  FaLinkedin 
+} from 'react-icons/fa';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -161,16 +167,16 @@ export default function ContactPage() {
               <h3 className="font-semibold text-white mb-4">Follow Us</h3>
               <div className="flex space-x-4">
                 {[
-                  { name: 'Facebook', icon: '📘' },
-                  { name: 'Twitter', icon: '🐦' },
-                  { name: 'Instagram', icon: '📷' },
-                  { name: 'LinkedIn', icon: '💼' }
+                  { name: 'Facebook', icon: <FaFacebook className="text-blue-500" /> },
+                  { name: 'Twitter', icon: <FaTwitter className="text-blue-400" /> },
+                  { name: 'Instagram', icon: <FaInstagram className="text-pink-500" /> },
+                  { name: 'LinkedIn', icon: <FaLinkedin className="text-blue-600" /> }
                 ].map((social) => (
                   <button
                     key={social.name}
                     className="w-10 h-10 bg-gray-800 hover:bg-orange-900 rounded-full flex items-center justify-center transition-colors duration-200"
                   >
-                    <span className="text-lg">{social.icon}</span>
+                    {social.icon}
                   </button>
                 ))}
               </div>

@@ -3,6 +3,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { FaTimes, FaPlus, FaMinus, FaShoppingBag, FaTrash } from 'react-icons/fa';
+import toast from 'react-hot-toast';
 
 export default function Cart({ 
   isOpen, 
@@ -16,8 +17,8 @@ export default function Cart({
   getFinalTotal 
 }) {
   const handleCheckout = () => {
-    // Simple checkout simulation
-    alert('Checkout functionality would be implemented here!');
+   toast.success("Order Successful")
+   clearCart()
   };
 
   return (
@@ -76,7 +77,7 @@ export default function Cart({
                     >
                       <div className="flex gap-3">
                         {/* Food Image */}
-                        <div className="relative w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
+                        <div className="relative w-16 h-16 rounded-lg overflow-hidden shrink-0">
                           <Image
                             src={item.image}
                             alt={item.name}
@@ -186,7 +187,7 @@ export default function Cart({
                 {/* Checkout Button */}
                 <button
                   onClick={handleCheckout}
-                  className="w-full bg-gradient-to-r from-orange-500 to-red-600 text-white font-bold py-3 rounded-lg hover:shadow-lg transition-all duration-300"
+                  className="w-full bg-linear-to-r from-orange-500 to-red-600 text-white font-bold py-3 rounded-lg hover:shadow-lg transition-all duration-300"
                 >
                   Proceed to Checkout
                 </button>

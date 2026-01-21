@@ -95,7 +95,7 @@ export const useCart = () => {
   };
 
   const getSubtotal = () => getTotalPrice();
-  const getDeliveryFee = () => getTotalPrice() > 500 ? 0 : 50; // Free delivery over ₹500
+  const getDeliveryFee = () => getTotalPrice() > 500 ? 0 : 50;
   const getFinalTotal = () => getSubtotal() + getDeliveryFee();
 
   return {

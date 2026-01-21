@@ -32,7 +32,10 @@ export default function LoginPage() {
   // Check if already logged in
   useEffect(() => {
     if (auth.isAuthenticated()) {
-      router.push('/foods');
+      // Check if there's a redirect URL in the query params
+      const urlParams = new URLSearchParams(window.location.search);
+      const redirectTo = urlParams.get('redirect') || '/foods';
+      router.push(redirectTo);
     }
   }, [router]);
 
@@ -88,8 +91,10 @@ export default function LoginPage() {
           },
         });
         
-        // Redirect to foods page (items/lists page)
-        router.push('/foods');
+        // Check if there's a redirect URL in the query params
+        const urlParams = new URLSearchParams(window.location.search);
+        const redirectTo = urlParams.get('redirect') || '/foods';
+        router.push(redirectTo);
       }
       
     } catch (error) {

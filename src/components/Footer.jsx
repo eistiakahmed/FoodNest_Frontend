@@ -1,5 +1,4 @@
 'use client';
-import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import {
@@ -12,16 +11,9 @@ import {
   FaEnvelope,
   FaMapMarkerAlt,
   FaClock,
-  FaApple,
-  FaGooglePlay,
 } from 'react-icons/fa';
 
 export default function Footer() {
-  const [currentYear, setCurrentYear] = useState(2026);
-
-  useEffect(() => {
-    setCurrentYear(new Date().getFullYear());
-  }, []);
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -149,7 +141,7 @@ export default function Footer() {
               {/* Contact Information */}
               <div className="space-y-4 mb-8">
                 <div className="flex items-start space-x-3">
-                  <FaMapMarkerAlt className="text-orange-500 mt-1 flex-shrink-0" />
+                  <FaMapMarkerAlt className="text-orange-500 mt-1 shrink-0" />
                   <span className="text-gray-300 text-sm">
                     123 Food Street, Culinary District
                     <br />
@@ -157,57 +149,24 @@ export default function Footer() {
                   </span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <FaPhone className="text-orange-500 flex-shrink-0" />
+                  <FaPhone className="text-orange-500 shrink-0" />
                   <span className="text-gray-300 text-sm">
                     +1 (555) 123-4567
                   </span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <FaEnvelope className="text-orange-500 flex-shrink-0" />
+                  <FaEnvelope className="text-orange-500 shrink-0" />
                   <span className="text-gray-300 text-sm">
                     support@foodnest.com
                   </span>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <FaClock className="text-orange-500 mt-1 flex-shrink-0" />
+                  <FaClock className="text-orange-500 mt-1 shrink-0" />
                   <span className="text-gray-300 text-sm">
                     24/7 Customer Support
                     <br />
                     Always here to help
                   </span>
-                </div>
-              </div>
-
-              {/* App Download Links */}
-              <div>
-                <h5 className="font-semibold mb-4">Download Our App</h5>
-                <div className="space-y-3">
-                  <motion.a
-                    href="#"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="flex items-center space-x-3 bg-gray-800 hover:bg-gray-700 rounded-lg p-3 transition-colors duration-200"
-                  >
-                    <FaApple className="text-2xl" />
-                    <div>
-                      <div className="text-xs text-gray-400">
-                        Download on the
-                      </div>
-                      <div className="text-sm font-semibold">App Store</div>
-                    </div>
-                  </motion.a>
-                  <motion.a
-                    href="#"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="flex items-center space-x-3 bg-gray-800 hover:bg-gray-700 rounded-lg p-3 transition-colors duration-200"
-                  >
-                    <FaGooglePlay className="text-2xl" />
-                    <div>
-                      <div className="text-xs text-gray-400">Get it on</div>
-                      <div className="text-sm font-semibold">Google Play</div>
-                    </div>
-                  </motion.a>
                 </div>
               </div>
             </motion.div>
@@ -229,8 +188,8 @@ export default function Footer() {
               variants={itemVariants}
               className="text-gray-400 text-sm"
             >
-              © {currentYear} FoodNest. All rights reserved. Made with ❤️ for
-              food lovers.
+              © {new Date().getFullYear()} FoodNest. All rights reserved. Made
+              with ❤️ for food lovers.
             </motion.div>
 
             <motion.div

@@ -158,9 +158,7 @@ export default function AboutPage() {
                   />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4">
-                Our Vision
-              </h3>
+              <h3 className="text-2xl font-bold text-white mb-4">Our Vision</h3>
               <p className="text-gray-300 text-lg">
                 To become the most trusted and beloved food delivery platform,
                 empowering local restaurants to thrive while bringing
@@ -294,21 +292,21 @@ export default function AboutPage() {
                 role: 'CEO & Founder',
                 bio: 'Passionate about food and technology, Alex founded FoodNest to revolutionize food delivery.',
                 avatar:
-                  'https://i.ibb.co/9kHpfRj/From-Klick-Pin-CF-Nailed-it-Professional-profile-pictures-Guy-pictures-Man-photo.jpg',
+                  'https://i.ibb.co.com/9kHpfRjS/From-Klick-Pin-CF-Nailed-it-Professional-profile-pictures-Guy-pictures-Man-photo.jpg',
               },
               {
                 name: 'Sarah Chen',
                 role: 'Head of Operations',
                 bio: 'Sarah ensures our delivery network runs smoothly and efficiently across all cities.',
                 avatar:
-                  'https://i.ibb.co/BHS1BDt/From-Klick-Pin-CF-Pin-de-K-bra-Akak-e-em-A-ART-Beleza-de-mulher-Mulher-Beleza.jpg',
+                  'https://i.ibb.co.com/BHS1BDtJ/From-Klick-Pin-CF-Pin-de-K-bra-Akak-e-em-A-ART-Beleza-de-mulher-Mulher-Beleza.jpg',
               },
               {
                 name: 'Mike Rodriguez',
                 role: 'Head of Technology',
                 bio: 'Mike leads our tech team in building innovative solutions for seamless food ordering.',
                 avatar:
-                  'https://i.ibb.co/3YFRdDJ/From-Klick-Pin-CF-portrait-LINKEDIN-Corporate-headshot-poses-Headshots-professional-Corporate-portr.jpg',
+                  'https://i.ibb.co.com/3YFRdDJS/From-Klick-Pin-CF-portrait-LINKEDIN-Corporate-headshot-poses-Headshots-professional-Corporate-portr.jpg',
               },
             ].map((member, index) => (
               <motion.div
@@ -316,12 +314,12 @@ export default function AboutPage() {
                 variants={itemVariants}
                 className="bg-gray-900 border border-gray-700 rounded-2xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 text-center"
               >
-                <Image 
-                  src={member.avatar} 
-                  alt={member.name} 
-                  width={100} 
-                  height={100} 
-                  className="w-24 h-24 rounded-full mx-auto mb-4 object-cover" 
+                <Image
+                  src={member.avatar}
+                  alt={member.name}
+                  width={100}
+                  height={100}
+                  className="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
                 />
                 <h3 className="text-xl font-semibold text-white mb-1">
                   {member.name}

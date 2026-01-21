@@ -31,19 +31,38 @@ export default function RootLayout({ children }) {
             toastOptions={{
               duration: 4000,
               style: {
-                background: '#363636',
+                background: '#1f2937',
                 color: '#fff',
-                borderRadius: '10px',
+                borderRadius: '12px',
                 padding: '16px',
+                border: '1px solid #374151',
+                fontSize: '14px',
+                fontWeight: '500',
               },
               success: {
                 style: {
                   background: '#10B981',
+                  color: '#fff',
+                },
+                iconTheme: {
+                  primary: '#fff',
+                  secondary: '#10B981',
                 },
               },
               error: {
                 style: {
                   background: '#EF4444',
+                  color: '#fff',
+                },
+                iconTheme: {
+                  primary: '#fff',
+                  secondary: '#EF4444',
+                },
+              },
+              loading: {
+                style: {
+                  background: '#F59E0B',
+                  color: '#fff',
                 },
               },
             }}

@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import {
   FaPlus,
   FaTrash,
@@ -15,6 +15,7 @@ import {
   FaImage,
   FaLeaf,
 } from 'react-icons/fa';
+import Image from 'next/image';
 
 export default function AddFoodPage() {
   const [formData, setFormData] = useState({
@@ -177,13 +178,7 @@ export default function AddFoodPage() {
       const result = await response.json();
 
       if (result.success) {
-        toast.success('Food item added successfully!', {
-          duration: 4000,
-          style: {
-            background: '#10B981',
-            color: 'white',
-          },
-        });
+        toast.success('Food item added successfully!');
 
         // Reset form
         setFormData({
@@ -238,16 +233,6 @@ export default function AddFoodPage() {
 
   return (
     <div className="min-h-screen bg-black">
-      <Toaster
-        position="top-right"
-        toastOptions={{
-          duration: 3000,
-          style: {
-            background: '#1f2937',
-            color: '#fff',
-          },
-        }}
-      />
 
       {/* Hero Section */}
       <div className="bg-linear-to-r from-orange-500 to-red-600 text-white py-16">
@@ -519,7 +504,7 @@ export default function AddFoodPage() {
                   />
                   {imagePreview && (
                     <div className="mt-3">
-                      <img
+                      <Image
                         src={imagePreview}
                         alt="Preview"
                         className="w-32 h-32 object-cover rounded-lg border-2 border-gray-600"
@@ -643,7 +628,7 @@ export default function AddFoodPage() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-gradient-to-r from-orange-500 to-red-600 text-white font-semibold py-4 px-6 rounded-lg hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full bg-linear-to-r from-orange-500 to-red-600 text-white font-semibold py-4 px-6 rounded-lg hover:shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {isSubmitting ? (
                   <>

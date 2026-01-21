@@ -4,7 +4,14 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/hooks/useAuth';
 import { useCartContext } from '@/components/CartProvider';
-import { FaUser, FaSignOutAlt, FaList, FaUserShield, FaShoppingCart } from 'react-icons/fa';
+import {
+  FaHome,
+  FaUser,
+  FaSignOutAlt,
+  FaList,
+  FaUserShield,
+  FaShoppingCart,
+} from 'react-icons/fa';
 import toast from 'react-hot-toast';
 
 export default function Navbar() {
@@ -20,8 +27,8 @@ export default function Navbar() {
   };
 
   const navLinks = [
-    { href: '/', label: 'Home' },
-    { href: '/foods', label: 'Items/Lists', icon: FaList },
+    { href: '/', label: 'Home'},
+    { href: '/foods', label: 'Foods' },
     { href: '/about', label: 'About' },
     { href: '/contact', label: 'Contact' },
     { href: '/partner', label: 'Partner' },
@@ -33,7 +40,7 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="bg-black shadow-md lg:shadow-none border-b border-gray-800">
+    <nav className="bg-black shadow-md lg:shadow-none ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
@@ -60,7 +67,7 @@ export default function Navbar() {
             {/* Cart Button */}
             <button
               onClick={() => setCartOpen(true)}
-              className="relative text-gray-300 hover:text-orange-500 transition-colors duration-200 p-2"
+              className="relative text-gray-300 hover:text-orange-500 transition-colors duration-200 p-3 hover:border-4 rounded-full shadow-md"
             >
               <FaShoppingCart className="text-xl" />
               {getTotalItems() > 0 && (

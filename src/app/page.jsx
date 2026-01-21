@@ -9,7 +9,7 @@ import CallToAction from '@/components/home/CallToAction';
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-black overflow-hidden">
       {/* 1. Hero Section (Banner) */}
       <Banner />
 
