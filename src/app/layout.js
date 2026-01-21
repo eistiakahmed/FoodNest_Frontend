@@ -3,6 +3,7 @@ import './globals.css';
 import Navbar from '@/components/navbar';
 import Footer from '@/components/Footer';
 import { Toaster } from 'react-hot-toast';
+import CartProvider from '@/components/CartProvider';
 
 const ubuntu = Ubuntu({
   subsets: ['latin'],
@@ -21,31 +22,33 @@ export default function RootLayout({ children }) {
       <body
         className={`${ubuntu.variable} font-ubuntu antialiased bg-black text-white`}
       >
-        <Navbar />
-        {children}
-        <Footer />
-        <Toaster 
-          position="top-right"
-          toastOptions={{
-            duration: 4000,
-            style: {
-              background: '#363636',
-              color: '#fff',
-              borderRadius: '10px',
-              padding: '16px',
-            },
-            success: {
+        <CartProvider>
+          <Navbar />
+          {children}
+          <Footer />
+          <Toaster 
+            position="top-right"
+            toastOptions={{
+              duration: 4000,
               style: {
-                background: '#10B981',
+                background: '#363636',
+                color: '#fff',
+                borderRadius: '10px',
+                padding: '16px',
               },
-            },
-            error: {
-              style: {
-                background: '#EF4444',
+              success: {
+                style: {
+                  background: '#10B981',
+                },
               },
-            },
-          }}
-        />
+              error: {
+                style: {
+                  background: '#EF4444',
+                },
+              },
+            }}
+          />
+        </CartProvider>
       </body>
     </html>
   );

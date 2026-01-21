@@ -5,12 +5,24 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 
+import { useCartContext } from '@/components/CartProvider';
+import toast from 'react-hot-toast';
+
 export default function FoodDetailsPage() {
   const params = useParams();
   const [food, setFood] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const { addToCart } = useCartContext();
+
+  const handleAddToCart = () => {
+    if (food && food.isAvailable) {
+      addToCart(food, quantity);
+    } else {
+      toast.error('This item is currently unavailable');
+    }
+  };
 
   useEffect(() => {
     const fetchFood = async () => {
@@ -341,7 +353,13 @@ export default function FoodDetailsPage() {
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="flex-1 bg-orange-600 hover:bg-orange-700 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2"
+                  onClick={handleAddToCart}
+                  disabled={!food.isAvailable}
+                  className={`flex-1 font-semibold py-4 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2 ${
+                    food.isAvailable
+                      ? 'bg-orange-600 hover:bg-orange-700 text-white'
+                      : 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                  }`}
                 >
                   <svg
                     className="w-5 h-5"
@@ -356,7 +374,11 @@ export default function FoodDetailsPage() {
                       d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m0 0h8"
                     />
                   </svg>
-                  <span>Add to Cart - ₹{finalPrice * quantity}</span>
+                  <span>
+                    {food.isAvailable
+                      ? `Add to Cart - ₹${finalPrice * quantity}`
+                      : 'Currently Unavailable'}
+                  </span>
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.02 }}

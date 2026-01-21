@@ -3,9 +3,17 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaRegEye } from 'react-icons/fa';
+import { useCartContext } from '@/components/CartProvider';
+import SafeImage from '@/components/SafeImage';
+import { FaRegEye, FaPlus, FaLeaf } from 'react-icons/fa';
 
 const FoodCard = ({ food }) => {
+  const { addToCart } = useCartContext();
+
+  const handleAddToCart = (e) => {
+    e.preventDefault(); // Prevent navigation when clicking add to cart
+    addToCart(food, 1);
+  };
   return (
     <motion.div
       whileHover={{ y: -5 }}
@@ -21,6 +29,10 @@ const FoodCard = ({ food }) => {
                 alt={food.name}
                 fill
                 className="object-cover"
+                onError={(e) => {
+                  // Fallback to placeholder if image fails to load
+                  e.target.style.display = 'none';
+                }}
               />
             ) : (
               <div className="flex items-center justify-center h-full">
@@ -41,13 +53,19 @@ const FoodCard = ({ food }) => {
             )}
 
             {/* Category Badge */}
-            {food.category && (
-              <div className="absolute top-3 left-3">
+            <div className="absolute top-3 left-3 flex gap-2">
+              {food.category && (
                 <span className="px-3 py-1 bg-orange-600 text-white text-xs font-semibold rounded-full">
                   {food.category}
                 </span>
-              </div>
-            )}
+              )}
+              {food.isVeg && (
+                <span className="px-2 py-1 bg-green-600 text-white text-xs font-semibold rounded-full flex items-center gap-1">
+                  <FaLeaf className="text-xs" />
+                  Veg
+                </span>
+              )}
+            </div>
 
             {/* Rating Badge */}
             {food.rating && (
@@ -96,26 +114,10 @@ const FoodCard = ({ food }) => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    // Add to cart logic here
-                    console.log('Added to cart:', food.name);
-                  }}
+                  onClick={handleAddToCart}
                   className="px-4 btn lg:btn-sm lg:ml-3 py-2 bg-orange-600 hover:bg-orange-700 text-white font-medium rounded-lg transition-colors duration-200 flex items-center"
                 >
-                  <svg
-                    className="w-4 h-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m0 0h8"
-                    />
-                  </svg>
+                  <FaPlus className="w-4 h-4" />
                   <span className="ml-1">Add</span>
                 </motion.button>
                 <Link

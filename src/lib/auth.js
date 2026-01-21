@@ -13,7 +13,21 @@ const COOKIE_OPTIONS = {
   sameSite: 'strict'
 };
 
+// Event listeners for auth state changes
+const authListeners = new Set();
+
 export const auth = {
+  // Add auth state listener
+  addAuthListener: (callback) => {
+    authListeners.add(callback);
+    return () => authListeners.delete(callback);
+  },
+
+  // Notify all listeners of auth state change
+  notifyAuthChange: () => {
+    authListeners.forEach(callback => callback());
+  },
+
   // Login function
   login: async (email, password) => {
     // Simulate API delay
@@ -34,6 +48,9 @@ export const auth = {
       Cookies.set('foodnest_auth', JSON.stringify(user), COOKIE_OPTIONS);
       Cookies.set('foodnest_token', 'mock_jwt_token_' + Date.now(), COOKIE_OPTIONS);
       
+      // Notify listeners of auth state change
+      auth.notifyAuthChange();
+      
       return { success: true, user };
     } else {
       throw new Error('Invalid email or password');
@@ -44,6 +61,9 @@ export const auth = {
   logout: () => {
     Cookies.remove('foodnest_auth');
     Cookies.remove('foodnest_token');
+    
+    // Notify listeners of auth state change
+    auth.notifyAuthChange();
     
     // Redirect to login
     if (typeof window !== 'undefined') {

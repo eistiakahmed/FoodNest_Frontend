@@ -1,25 +1,22 @@
 'use client';
 import Link from 'next/link';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { auth } from '@/lib/auth';
-import { FaUser, FaSignOutAlt, FaList } from 'react-icons/fa';
+import { useAuth } from '@/hooks/useAuth';
+import { useCartContext } from '@/components/CartProvider';
+import { FaUser, FaSignOutAlt, FaList, FaUserShield, FaShoppingCart } from 'react-icons/fa';
+import toast from 'react-hot-toast';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [user, setUser] = useState(null);
   const [showUserMenu, setShowUserMenu] = useState(false);
-
-  useEffect(() => {
-    // Check authentication status
-    const currentUser = auth.getCurrentUser();
-    setUser(currentUser);
-  }, []);
+  const { user, isAuthenticated, logout } = useAuth();
+  const { getTotalItems, setIsOpen: setCartOpen } = useCartContext();
 
   const handleLogout = () => {
-    auth.logout();
-    setUser(null);
+    logout();
     setShowUserMenu(false);
+    toast.success('Logged out successfully');
   };
 
   const navLinks = [
@@ -31,8 +28,8 @@ export default function Navbar() {
   ];
 
   // Add admin link if user is authenticated
-  if (user) {
-    navLinks.push({ href: '/admin', label: 'Admin' });
+  if (isAuthenticated) {
+    navLinks.push({ href: '/admin', label: 'Admin', icon: FaUserShield });
   }
 
   return (
@@ -59,18 +56,31 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
+            
+            {/* Cart Button */}
+            <button
+              onClick={() => setCartOpen(true)}
+              className="relative text-gray-300 hover:text-orange-500 transition-colors duration-200 p-2"
+            >
+              <FaShoppingCart className="text-xl" />
+              {getTotalItems() > 0 && (
+                <span className="absolute -top-1 -right-1 bg-orange-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+                  {getTotalItems()}
+                </span>
+              )}
+            </button>
           </div>
 
           {/* CTA Button Desktop */}
-          <div className="hidden md:block">
-            {user ? (
+          <div className="hidden md:flex items-center space-x-4">
+            {isAuthenticated ? (
               <div className="relative">
                 <button
                   onClick={() => setShowUserMenu(!showUserMenu)}
                   className="flex items-center gap-2 px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white font-semibold rounded-lg transition-colors duration-200"
                 >
                   <FaUser className="text-sm" />
-                  {user.name}
+                  {user?.name || 'User'}
                 </button>
                 
                 {showUserMenu && (
@@ -151,12 +161,25 @@ export default function Navbar() {
                     {link.label}
                   </Link>
                 ))}
+                
+                {/* Mobile Cart Button */}
+                <button
+                  onClick={() => {
+                    setCartOpen(true);
+                    setIsOpen(false);
+                  }}
+                  className="flex items-center gap-2 px-4 py-2 text-gray-300 hover:bg-gray-800 hover:text-orange-500 rounded-lg transition-colors duration-200 w-full"
+                >
+                  <FaShoppingCart className="text-sm" />
+                  <span>Cart ({getTotalItems()})</span>
+                </button>
+                
                 <div className="px-4 pt-2">
-                  {user ? (
+                  {isAuthenticated ? (
                     <div className="space-y-2">
                       <div className="text-sm text-gray-400 border-b border-gray-700 pb-2">
-                        <p className="font-medium text-white">{user.name}</p>
-                        <p>{user.email}</p>
+                        <p className="font-medium text-white">{user?.name}</p>
+                        <p>{user?.email}</p>
                       </div>
                       <button
                         onClick={handleLogout}
